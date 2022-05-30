@@ -36,7 +36,7 @@ function Form_Contact_Us()
     <?php
 }
 
-// add_action( 'the_content', 'Form_Contact_Us' );
+add_action( 'the_content', 'Form_Contact_Us' );
 add_shortcode( 'the_content', 'Form_Contact_Us' );
 
 if ( isset( $_POST['cf-submitted'] ) ) {
@@ -45,7 +45,6 @@ if ( isset( $_POST['cf-submitted'] ) ) {
     $email   =$_POST["email"] ;
     $subject = $_POST["subject"] ;
     $message = $_POST["message"] ;
-    // get the blog administrator's email address
     saveDataToTable($email,$name,$message,$subject);?>
     
  
@@ -63,6 +62,7 @@ if ( isset( $_POST['cf-submitted'] ) ) {
     
     });
 }
+echo 'Your Message send successfully';
 
 
 
