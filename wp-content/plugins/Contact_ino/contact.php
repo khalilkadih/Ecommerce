@@ -18,7 +18,7 @@ function Form_Contact_Us()
    <form action="" method="post">
     <p>
     Your Name (required) <br />
-    <input type="text" name="name" size="40" />
+    <input type="text" name="name" size="40"  id="name"/>
     </p>
     <p>
     Your Email (required) <br />
