@@ -39,4 +39,31 @@ function Form_Contact_Us()
 // add_action( 'the_content', 'Form_Contact_Us' );
 add_shortcode( 'the_content', 'Form_Contact_Us' );
 
+if ( isset( $_POST['cf-submitted'] ) ) {
+    // sanitize form values
+    $name    =  $_POST["name"] ;
+    $email   =$_POST["email"] ;
+    $subject = $_POST["subject"] ;
+    $message = $_POST["message"] ;
+    // get the blog administrator's email address
+    saveDataToTable($email,$name,$message,$subject);?>
+    
+ 
+    <div class="alert alert-success" style="font-weight:bold;border:sloid black 1px;border-radius: 5px">
+        message sent to admins!
+    </div>
+    <?php
+    add_action('activate_contact-us-test/contact.php',function(){
+        $wpdb->query("CREATE TABLE IF NOT EXISTS `ecommerce`.`wp_contact_plugin` ( `id` INT NOT NULL AUTO_INCREMENT , `email` TEXT NOT NULL , `name` TEXT NOT NULL , `subject` TEXT NOT NULL , `message` TEXT NOT NULL");
+    
+    });
+    
+    add_action('deactivate_contact-us-test/contact.php',function(){
+        $wpdb->query("INSERT INTO `wp_contact_plugin` (`email`, `name`, `subject`, `message`) VALUES (NULL, '{$email}', '{$name}', '{$subject}', '{$subject}');");
+    
+    });
+}
+
+
+
 ?>
